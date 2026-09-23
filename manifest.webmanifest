@@ -1,0 +1,10 @@
+{
+  "name": "化学助手",
+  "short_name": "化学助手",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f5fa",
+  "theme_color": "#4f46e5",
+  "lang": "zh-CN",
+  "description": "相对分子质量与弱酸弱碱常数查询"
+}

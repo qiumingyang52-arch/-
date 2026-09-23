@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="化学助手">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>化学助手</title>
+  <style>
+    :root { color-scheme: light; --indigo:#4f46e5; --bg:#f5f5fa; --card:#fff; --text:#1f2937; --muted:#6b7280; }
+    * { box-sizing:border-box; } body { margin:0; background:var(--bg); color:var(--text); font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    header { padding:calc(18px + env(safe-area-inset-top)) 20px 18px; background:var(--indigo); color:white; } h1 { margin:0; font-size:24px; } header p { margin:5px 0 0; opacity:.85; font-size:13px; }
+    main { max-width:680px; margin:0 auto; padding:16px 16px calc(30px + env(safe-area-inset-bottom)); } .tabs { display:flex; gap:8px; margin-bottom:14px; }
+    button,.tab { border:0; border-radius:12px; min-height:44px; font:inherit; cursor:pointer; } .tab { flex:1; background:#e5e7eb; color:#374151; } .tab.active { background:var(--indigo); color:#fff; }
+    section.card { background:var(--card); border-radius:18px; padding:18px; box-shadow:0 2px 12px #1f293710; margin-bottom:14px; } label { display:block; color:var(--muted); font-size:14px; margin-bottom:7px; }
+    input { width:100%; min-height:48px; border:1px solid #d1d5db; border-radius:11px; padding:0 13px; font-size:18px; outline-color:var(--indigo); } .primary { width:100%; margin-top:12px; background:var(--indigo); color:white; padding:11px; }
+    .result { display:flex; align-items:center; justify-content:space-between; gap:12px; } .mass { color:var(--indigo); font-size:32px; font-weight:700; } .hint { color:var(--muted); font-size:13px; line-height:1.6; } .error { color:#dc2626; margin-top:12px; }
+    .kind { display:flex; gap:8px; margin-bottom:12px; } .kind button { flex:1; background:#eef2ff; color:#3730a3; } .kind button.active { background:var(--indigo); color:white; }
+    .entry { padding:14px 0; border-bottom:1px solid #e5e7eb; } .entry:last-child { border-bottom:0; } .entry-top { display:flex; justify-content:space-between; gap:12px; font-weight:600; } .formula { color:var(--muted); font-weight:400; } .constant { color:var(--indigo); margin:7px 0 4px; font-family:ui-monospace,monospace; } .note { color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <header><h1>化学助手</h1><p>相对分子质量 · 弱酸弱碱常数</p></header>
+  <main>
+    <nav class="tabs"><button id="massTab" class="tab active">算 Mr</button><button id="constantTab" class="tab">查 Ka / Kb</button></nav>
+    <section id="massPanel" class="card">
+      <label for="formula">输入化学式</label>
+      <input id="formula" value="H2SO4" placeholder="例如 Ca(OH)2、CuSO4·5H2O" autocomplete="off" autocapitalize="characters">
+      <button id="calculate" class="primary">计算相对分子质量</button>
+      <div id="massResult" hidden></div><div id="massError" class="error" hidden></div>
+      <p class="hint">支持下标、圆/方括号和结晶水点号。元素符号使用英文。</p>
+    </section>
+    <section id="constantPanel" class="card" hidden>
+      <div class="kind"><button data-kind="acid" class="active">弱酸 Ka</button><button data-kind="base">弱碱 Kb</button></div>
+      <input id="search" placeholder="搜索名称、化学式或别名" autocomplete="off">
+      <div id="entries"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
